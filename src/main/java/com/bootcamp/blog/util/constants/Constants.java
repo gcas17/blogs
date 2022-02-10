@@ -31,4 +31,6 @@ public class Constants {
     public static final String COMMENT__WITH_POST_INACTIVE_ERROR_MESSAGE = "Solo se puede registrar comentarios en publicaciones con estado 'Publicado'.";
 
     public static int LEGAL_AGE = 18;
+
+    public static int LIMIT_BLOGS_BY_AUTHOR = 3;
 }

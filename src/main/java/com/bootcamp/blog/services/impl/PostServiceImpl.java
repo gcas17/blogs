@@ -53,10 +53,12 @@ public class PostServiceImpl implements PostService {
         }
 
         for (Post item : blog.get().getPosts()) {
-            validateSameDayPostByBlog(
+            if(validateSameDayPostByBlog(
                     item.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate(),
-                    post.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate()
-            );
+                    post.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate())
+            ) {
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, POST_SAME_DAY_ERROR_MESSAGE);
+            }
         }
 
         if(!validatePostStatus(post.getStatus())) {
@@ -90,10 +92,8 @@ public class PostServiceImpl implements PostService {
                 || trim(status).toUpperCase().equals(PostStatus.PUBLISHED.getDescription().toUpperCase());
     }
 
-    private void validateSameDayPostByBlog(LocalDate fecha1, LocalDate fecha2) {
+    private boolean validateSameDayPostByBlog(LocalDate fecha1, LocalDate fecha2) {
         Period period = Period.between(fecha1, fecha2);
-        if(period.getYears() == 0 && period.getMonths() == 0 && period.getDays() == 0) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, POST_SAME_DAY_ERROR_MESSAGE);
-        }
+        return period.getYears() == 0 && period.getMonths() == 0 && period.getDays() == 0;
     }
 }

@@ -43,7 +43,7 @@ public class BlogServiceImpl implements BlogService {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, AUTHOR_NOT_FOUND_ERROR_MESSAGE);
         }
 
-        if(author.get().getBlogs().size() >= 3) {
+        if(author.get().getBlogs().size() >= LIMIT_BLOGS_BY_AUTHOR) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, BLOG_LIMIT_BY_AUTHOR_ERROR_MESSAGE);
         }
 
