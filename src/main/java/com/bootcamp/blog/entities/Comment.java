@@ -23,6 +23,9 @@ public class Comment {
     @Column(name = "name")
     private String name;
 
+    @Column(name = "comment")
+    private String comment;
+
     @Column(name = "status")
     private String status;
 
