@@ -11,5 +11,5 @@ RUN mvn -f /home/app/pom.xml clean package
 #
 FROM openjdk:11-jdk
 COPY --from=build /home/app/target/blogs-0.0.1-SNAPSHOT.jar /usr/local/lib/demo.jar
-EXPOSE 8080
+EXPOSE 1603
 ENTRYPOINT ["java","-jar","/usr/local/lib/demo.jar"]
